@@ -80,5 +80,6 @@ end sort_records
   // create holder for state objects
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
+  sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
 
 
