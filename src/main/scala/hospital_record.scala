@@ -10,7 +10,25 @@ class Hospital(_state : String):
   var Record : List[] = List()
 
   // Implement an addRecordByState method
-  // def addRecord(_unfilteredData : List[List[String]]) : List[] =
+  // def AddRecord(_unfilteredData : List[String]) : Unit =
+       // Assess the list items
+       if _unfilteredData(1) == this.State then
+          //if the record belongs to the current state/ similar state
+          val record = Records(
+            date = _unfilteredData(0)
+            total_Bed = _unfilteredData(2).toInt
+            covid_Bed = _unfilteredData(3).toInt
+            Ncritical_Bed = _unfilteredData(4).toInt
+            admitted_pui = _unfilteredData(5).toInt
+            admitted_covid = _unfilteredData(6).toInt
+            dPui = _unfilteredData(7).toInt
+            dCovid =  _unfilteredData(8).toInt
+            hospCovid = _unfilteredData(9).toInt
+            hospPui = _unfilteredData(10).toInt
+            hospNonCovid = _unfilteredData(11).toInt
+          ) 
+       // to ensure the Record is added
+       println(s"$record has been recorded into the program")   
 
 end Hospital
 
