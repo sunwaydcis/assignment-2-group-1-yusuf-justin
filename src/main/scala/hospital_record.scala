@@ -28,6 +28,7 @@ class Hospital(_state : String):
             hospNonCovid = _unfilteredData(11).toInt
           ) 
        // to ensure the Record is added
+       this.Record = this.Record :+ record // just added
        println(s"$record has been recorded into the program")   
 
 end Hospital
