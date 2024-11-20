@@ -10,7 +10,7 @@ class Hospital(_state : String):
   var Record : List[] = List()
 
   // Implement an addRecordByState method
-  // def AddRecord(_unfilteredData : List[String]) : Unit =
+  def AddRecord(_unfilteredData : List[String]) : Unit =
        // Assess the list items
        if _unfilteredData(1) == this.State then
           //if the record belongs to the current state/ similar state
@@ -30,6 +30,16 @@ class Hospital(_state : String):
        // to ensure the Record is added
        this.Record = this.Record :+ record // just added
        println(s"$record has been recorded into the program")   
+    end AddRecord   
+
+  // add a toString Method for Hospital Object
+  override def toString: String =
+    // overrides manual to String
+    this._state + " has " + this.Record.length + " Hosptial Records"
+  end toString
+
+  // define a method to track latest record
+  def latestRecord: Records =
 
 end Hospital
 

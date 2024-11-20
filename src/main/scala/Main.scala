@@ -37,11 +37,28 @@ def readCSV(fileName : String): List[List[String]] =
   fileData
 end readCSV
 
+// defines a method to init State objects 
+def state_init(): List[Hospital] =
+  // there are 15 states altogather so init 15 state objects
+  val State = List(
+    "Selangor", "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
+    "Pahang", "Perak", "Pulau Pinang", "Sabah", "Sarawak", "Terengganu",
+    "W.P. Kuala Lumpur", "W.P. Labuan", "Perlis"
+  )
+  val Hospitals = State.map(state => Hospital(_state = state))
+  // program returns Hospitals as List of Hospital objects
+  return Hospitals
+end state_init
+
 
 @main def main(): Unit =
-  // test readCSV method
+  // 1-test readCSV method
   hospitalData = readCSV()
-  // Test hopsital Data
+  // 2-Test hopsital Data
   // println(hospitalData)
-
   
+  // create holder for state objects
+  var HospitalObjects: List[Hospital] = state_init() 
+  // println(HospitalObjects) -- works well
+
+
