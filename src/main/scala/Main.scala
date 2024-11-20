@@ -23,7 +23,8 @@ def readCSV(fileName : String): List[List[String]] =
   var fileData : List[List[String]] = List()
   // to count number of records in the file
   var counter : Int = 0
-  for (line <- filePath.getLines()) 
+  // drop the header row, unnecessary for record processing
+  for (line <- filePath.getLines().drop(1)) 
     // for each line
     // split the information by each column// comma
     val cols : List = line.split(",").map(_.trim).toList
