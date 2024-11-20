@@ -33,3 +33,8 @@ def readCSV(fileName : String): List[List[String]] =
   end for
   filePath.close()
 end readCSV
+
+
+@main def main(): Unit =
+  // test readCSV method
+  hospitalData = readCSV()
