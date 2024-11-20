@@ -50,6 +50,26 @@ def state_init(): List[Hospital] =
   return Hospitals
 end state_init
 
+// create a function to sort records into their respective state objects
+def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[Hospital]): List[Hospital] =
+  // function takes in 2 inputs
+  // _unprocessed_records - List of List of Strings that is data parsed from csv file
+  // hospitalList - List of Hospital class objects that will hold the record for their respective states Hospitals
+
+  for (record <- _unprocessed_records)
+    // extract state information from the record
+    val state = record(1).trim
+    // match the record information to its corresponding Hospital object
+    val hospital = hospitalList.find(_.State == state)
+
+    // for a record, when a hospital object match is found, attach the record to it
+    hopsital match
+      case Some(hospital) => hospital.addRecord(record)
+      case None =>println(s"No Corresponding hospital found for $state")
+  end for
+  hospitalList
+end sort_records      
+
 
 @main def main(): Unit =
   // 1-test readCSV method
