@@ -34,6 +34,7 @@ def readCSV(fileName : String): List[List[String]] =
   end for
   println(s"Amount of hospital records in csv file: {$counter} records")
   filePath.close()
+  fileData
 end readCSV
 
 
@@ -41,4 +42,6 @@ end readCSV
   // test readCSV method
   hospitalData = readCSV()
   // Test hopsital Data
-  println(hospitalData)
+  // println(hospitalData)
+
+  
