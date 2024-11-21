@@ -40,20 +40,24 @@ class Hospital(_state : String):
     this._state + " has " + this.Record.length + " Hosptial Records"
   end toString
 
+  // Implemented a new latestRecord function 
+  // improved & more efficient
   // define a method to track latest record
-  def latestRecord: Option[Records] =
-      if this.Record.nonEmpty then
-      var RecentDate: LocalDate = Record.head.date
-      var recentRecord: Record = Record.head
-
-      for _ <- Record do
-        if RecentDate.isBefore(record.date) then
-          RecentDate = record.date
-          recentRecord = _
-      Some(recentRecord)
-    else
-      None
-
+  def latestRecord: Records =
+    // load records for hospital
+    val TotalHospitalRecords : List[Records] = this.Record
+    // set first record as latestRecord & its date as latest date
+    var LatestRecord : Records = TotalHospitalRecords(0)
+    var LatestDate : LocalDate = LatestRecord.Date
+    // process the total records
+    for ( records <- TotalHospitalRecords)
+      if( records.Date.isAfter(LatestDate)) then
+        LatestRecord = records
+        LatestDate = records.Date
+      end if
+    end for
+    LatestRecord
+  end latestRecord
 
 end Hospital
 
