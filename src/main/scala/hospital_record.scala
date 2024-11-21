@@ -41,14 +41,26 @@ class Hospital(_state : String):
   end toString
 
   // define a method to track latest record
-  def latestRecord: Records =
+  def latestRecord: Option[Records] =
+      if this.Record.nonEmpty then
+      var RecentDate: LocalDate = Record.head.date
+      var recentRecord: Record = Record.head
+
+      for _ <- Record do
+        if RecentDate.isBefore(record.date) then
+          RecentDate = record.date
+          recentRecord = _
+      Some(recentRecord)
+    else
+      None
+
 
 end Hospital
 
 // record class to hold each row data
 class Records(date : String , total_Bed : Int, covid_Bed : Int, Ncritical_Bed : Int, admittedPui : Int , admittedCovid : Int, dPui : Int, dCovid : Int, hospCovid : Int, hospPui : Int, hospNonCovid: Int):
   // added constructor into methods
-  val Date : String = date
+  val Date : LocalDate = date
   val TotalBed : Int = total_Bed
   val CovidBed : Int = covid_Bed
   val NonCritBed : Int = Ncritical_Bed
