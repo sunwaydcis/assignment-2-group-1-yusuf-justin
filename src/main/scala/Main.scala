@@ -43,7 +43,7 @@ def state_init(): List[Hospital] =
   val State = List(
     "Selangor", "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
     "Pahang", "Perak", "Pulau Pinang", "Sabah", "Sarawak", "Terengganu",
-    "W.P. Kuala Lumpur", "W.P. Labuan", "Perlis"
+    "W.P. Kuala Lumpur", "W.P. Labuan", "Perlis","W.P. Putrajaya"
   )
   val Hospitals = State.map(state => Hospital(_state = state))
   // program returns Hospitals as List of Hospital objects
