@@ -94,7 +94,7 @@ def Question1(records: List[Hospitals]): Unit =
   end for
   
   println(s"The state with the highest number of beds : $HighestBedCount")
-
+end Question1
 
 @main def main(): Unit =
   // 1-test readCSV method
@@ -105,12 +105,12 @@ def Question1(records: List[Hospitals]): Unit =
   // create holder for state objects
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
-  ProcessedHospitalData = sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
+  HospitalObjects = sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
 
   // Test hospital Objects latestRecord method
 
   // Question 1
-  Question1(ProcessedHospitalData)
+  Question1(HospitalObjects)
   // Question 2
 
   // Question 3
