@@ -70,6 +70,31 @@ def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[
   hospitalList
 end sort_records      
 
+// define a function for question 1
+Question 1
+// return the state with the highest total beds::
+
+def Question1(records: List[Hospitals]): String =
+  // get a list of state
+  val StateList : List[String] = records.map(records -> records.state)
+  val StateRecentRecord : List[Record] = StateList.map(StateList -> StateList.latestRecord)
+
+  // compare data between each state
+  var StateWithHighestBed : String = StateList(0)
+  var HighestBedCount : Int = StateRecentRecord(0).TotalBed
+  // iterate through the rest of the records
+  counter = 1
+  for ( counter < StateList.length ) do
+    // compare if current state has more bed than pointer
+    if (StateRecentRecord(counter).TotalBed > HighestBedCount) then
+      // reassign state name
+      StateWithHighestBed = StateList(counter)
+      HighestBedCount = StateRecentRecord(counter).TotalBed
+    end if
+  end for
+  
+  println(s"The state with the highest number of beds : $HighestBedCount")
+
 
 @main def main(): Unit =
   // 1-test readCSV method
@@ -81,5 +106,13 @@ end sort_records
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
   sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
+
+  // Test hospital Objects latestRecord method
+
+  // Question 1
+
+  // Question 2
+
+  // Question 3
 
 
