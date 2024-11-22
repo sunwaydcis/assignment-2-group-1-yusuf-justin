@@ -188,6 +188,23 @@ end Question3
 
 // Average : 3.75 seconds
 
+// optimization data : changes to addRecord use prepend()
+// 
+// run #1 Execution time: 3.7557482 seconds
+// run #2 Execution time: 3.1714426 seconds
+// run #3 Execution time: 3.0196635 seconds
+// run #4 Execution time: 3.6350455 seconds
+// run #5 Execution time: 3.4143609 seconds
+// run #6 Execution time: 3.4100239 seconds
+// run #7 Execution time: 2.9582922 seconds
+// run #8 Execution time: 3.3137803 seconds
+// run #9 Execution time: 3.0063626 seconds
+// run #10 Execution time: 3.5524468 seconds
+// run #11 Execution time: 3.3130368 seconds
+// run #12 Execution time: 2.9471243 seconds
+
+// Average : 3.29 Seconds
+
 // optimization data : With ProcessCSV
 // run #1 
 // run #2
