@@ -29,9 +29,8 @@ class Hospital(_state : String):
             hospPui = _unfilteredData(12).toInt,
             hospNonCovid = _unfilteredData(13).toInt
           ) 
-       // to ensure the Record is added
-       this.Record = this.Record.prepended(record) // -- change to optimize #1
-       //println(s"$record has been recorded into the program")   
+          this.Record = this.Record.prepended(record) // -- change to optimize #1
+        //println(s"$record has been recorded into the program")   
     end AddRecord   
 
   // add a toString Method for Hospital Object
