@@ -144,11 +144,11 @@ def Question3 (records : List[Hospital]): Unit =
       cNonCovidAdmissions += (record.Admitted_Total - record.Admitted_Covid)
     end for
     // calculate the average
-    //println("======================\n")
-    //println(s"$state")
-    //println("Average Suspected admissions :" + (cSuspectedAdmissions.toDouble /records.length).ceil + " individuals")
-    //println("Average Covid Admissions :"+(cCovidAdmissions.toDouble / records.length).ceil + " individuals")
-    //println("Average Non Covid Admissions :"+(cNonCovidAdmissions.toDouble / records.length).ceil + " individuals")
+    println("======================\n")
+    println(s"$state")
+    println("Average Suspected admissions :" + (cSuspectedAdmissions.toDouble /records.length).ceil + " individuals")
+    println("Average Covid Admissions :"+(cCovidAdmissions.toDouble / records.length).ceil + " individuals")
+    println("Average Non Covid Admissions :"+(cNonCovidAdmissions.toDouble / records.length).ceil + " individuals")
   end for
 end Question3
 
