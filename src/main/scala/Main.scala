@@ -8,13 +8,12 @@
 // import relevant libraries to process data
 import scala.io.Source
 import java.time.LocalDate
-import scala.collection.mutable.Map
 
 // define file path
-final val _FilePath : String = "./res/hospital_assignment.csv"
+val _FilePath : String = "./res/hospital_assignment.csv"
 
 // define placeholder variable to store data loaded from hospital_assignment.csv
-final val hospitalData : List[List[String]] 
+var hospitalData : List[List[String]] 
 
 // define method to read data from file path, and parse it into hospitalData
 def readCSV(fileName : String): List[List[String]] =
@@ -64,8 +63,8 @@ def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[
     val hospital = hospitalList.find(_.State == state)
 
     // for a record, when a hospital object match is found, attach the record to it
-    hopsital match
-      case Some(hospital) => hospital.addRecord(record)
+    hospital match
+      case Some(hospital) => hospital.AddRecord(record)
       case None =>println(s"No Corresponding hospital found for $state")
   end for
   hospitalList
@@ -77,7 +76,7 @@ def ProcessCSV(filePath : String) : List[Hospital] =
   // utilize map instead of list to store hospital data
   var hospitals : Map[String, Hospital] = Map()
   // read data from file path
-  val dataFromFile : BufferedSource = Source.fromFile(filePath)
+  val dataFromFile = Source.fromFile(filePath)
   try 
     dataFromFile.getLines().drop(1).foreach {
       line =>
@@ -221,14 +220,14 @@ end Question3
 
 @main def main(): Unit =
   // 1-test readCSV method
-  hospitalData = readCSV()
+  _hospitaldata = readCSV()
   // 2-Test hopsital Data
   // println(hospitalData)
   
   // create holder for state objects
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
-  HospitalObjects = sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
+  HospitalObjects = sort_records(_unprocessed_records = _hospitaldata, hospitalList = HospitalObjects)
 
   // Test hospital Objects latestRecord method
 
