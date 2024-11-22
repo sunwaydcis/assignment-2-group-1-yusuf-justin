@@ -126,7 +126,7 @@ end Question2
 // 
 def Question3 (records : List[Hospital]): Unit =
   // create Map -> StateName -> Amount Of Records
-  val RecordByStates : Map[String, List[Records]] = records.map{ hospital => hospital.State -> hospital.Record}
+  val RecordByStates : Map[String, List[Records]] = records.map{ hospital => hospital.State -> hospital.Record}.toMap
   println(RecordByStates)
   println("Question 3:\n")
   for ( (state , records) <- RecordByStates)
