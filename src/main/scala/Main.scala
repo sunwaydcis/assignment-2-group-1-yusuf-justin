@@ -238,5 +238,3 @@ end Question3
   Question2(HospitalObjects)
   // Question 3
   Question3(HospitalObjects)
-
-

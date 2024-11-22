@@ -31,7 +31,7 @@ class Hospital(_state : String):
           ) 
        // to ensure the Record is added
        this.Record = this.Record.prepended(record) // -- change to optimize #1
-       println(s"$record has been recorded into the program")   
+       //println(s"$record has been recorded into the program")   
     end AddRecord   
 
   // add a toString Method for Hospital Object
@@ -62,7 +62,7 @@ class Hospital(_state : String):
 end Hospital
 
 // record class to hold each row data
-class Records(date : String , total_Bed : Int, covid_Bed : Int, Ncritical_Bed : Int, admittedPui : Int , admittedCovid : Int, dPui : Int, dCovid : Int, hospCovid : Int, hospPui : Int, hospNonCovid: Int):
+class Records(date : LocalDate , total_Bed : Int, covid_Bed : Int, Ncritical_Bed : Int, admittedPui : Int , admittedCovid : Int, dPui : Int, dCovid : Int, hospCovid : Int, hospPui : Int, hospNonCovid: Int):
   // added constructor into methods
   val Date : LocalDate = date
   val TotalBed : Int = total_Bed
