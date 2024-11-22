@@ -71,7 +71,6 @@ def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[
 end sort_records      
 
 // define a function for question 1
-Question 1
 // return the state with the highest total beds::
 
 // improved code for question 1
