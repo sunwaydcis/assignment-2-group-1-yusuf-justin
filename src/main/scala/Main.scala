@@ -13,12 +13,12 @@ import java.time.LocalDate
 val _FilePath : String = "./res/hospital_assignment.csv"
 
 // define placeholder variable to store data loaded from hospital_assignment.csv
-var hospitalData : List[List[String]] 
+var hospitalData : List[List[String]]  = List()
 
 // define method to read data from file path, and parse it into hospitalData
 def readCSV(fileName : String): List[List[String]] =
   // create a pointer to the filePath
-  val filePath : BufferedSource = Source.fromFile(fileName)
+  val filePath = Source.fromFile(fileName)
   // initialize temporary placeholder to hold data
   var fileData : List[List[String]] = List()
   // to count number of records in the file
@@ -220,7 +220,7 @@ end Question3
 
 @main def main(): Unit =
   // 1-test readCSV method
-  _hospitaldata = readCSV()
+  _hospitaldata = readCSV(fileName =_FilePath )
   // 2-Test hopsital Data
   // println(hospitalData)
   
