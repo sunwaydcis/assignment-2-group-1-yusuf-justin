@@ -22,7 +22,7 @@ class Hospital(_state : String):
             covid_Bed = _unfilteredData(3).toInt,
             Ncritical_Bed = _unfilteredData(4).toInt,
             admittedPui = _unfilteredData(5).toInt,
-            admitted_covid = _unfilteredData(6).toInt,
+            admittedCovid = _unfilteredData(6).toInt,
             dPui = _unfilteredData(8).toInt,
             dCovid =  _unfilteredData(9).toInt,
             hospCovid = _unfilteredData(11).toInt,
