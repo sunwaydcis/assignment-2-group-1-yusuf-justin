@@ -74,7 +74,7 @@ end sort_records
 Question 1
 // return the state with the highest total beds::
 
-def Question1(records: List[Hospitals]): String =
+def Question1(records: List[Hospitals]): Unit =
   // get a list of state
   val StateList : List[String] = records.map(records -> records.state)
   val StateRecentRecord : List[Record] = StateList.map(StateList -> StateList.latestRecord)
@@ -105,12 +105,12 @@ def Question1(records: List[Hospitals]): String =
   // create holder for state objects
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
-  sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
+  ProcessedHospitalData = sort_records(_unprocessed_records = hospitalData, hospitalList = HospitalObjects)
 
   // Test hospital Objects latestRecord method
 
   // Question 1
-
+  Question1(ProcessedHospitalData)
   // Question 2
 
   // Question 3
