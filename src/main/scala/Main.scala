@@ -8,9 +8,10 @@
 // import relevant libraries to process data
 import scala.io.Source
 import java.time.LocalDate
+import scala.collection.mutable.Map
 
 // define file path
-final val filePath : String = "./res/hospital_assignment.csv"
+final val _FilePath : String = "./res/hospital_assignment.csv"
 
 // define placeholder variable to store data loaded from hospital_assignment.csv
 final val hospitalData : List[List[String]] 
@@ -69,6 +70,24 @@ def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[
   end for
   hospitalList
 end sort_records      
+
+// Streamlined version of readCSV, state_init, sort_records
+def ProcessCSV(filePath : String) : List[Hospital] =
+  // attempt to optimze by streamlining the readCSV, state_init, and sort_records
+  // utilize map instead of list to store hospital data
+  var hospitals : Map[String, Hospital] = Map()
+  // read data from file path
+  val dataFromFile : BufferedSource = Source.fromFile(filePath)
+  try 
+    dataFromFile.getLines().drop(1).foreach {
+      line =>
+      // sort 
+      val cols = line.split(",").map(_.trim).toList
+      val state = cols(1)
+      // insert logic later to sort by state
+      // if state doesn't exist, 
+    }
+
 
 // define a function for question 1
 // return the state with the highest total beds::
@@ -153,6 +172,35 @@ def Question3 (records : List[Hospital]): Unit =
 end Question3
 
 
+// optimization data : Before with readCSV, state_init & sort_records
+// run #1 Execution time: 5.1172229 seconds
+// run #2 Execution time: 4.2066958 seconds
+// run #3 Execution time: 3.0017617 seconds
+// run #4 Execution time: 3.8785137 seconds
+// run #5 Execution time: 3.885426 seconds
+// run $6 Execution time: 3.8028892 seconds
+// run #7 Execution time: 3.4410411 seconds
+// run #8 Execution time: 2.9825944 seconds
+// run #9 Execution time: 3.0242066 seconds
+// run #10 Execution time: 4.3136249 seconds
+// run #11 Execution time: 3.1380113 seconds
+// run #12 Execution time: 4.2288176 seconds
+
+// Average : 3.75 seconds
+
+// optimization data : With ProcessCSV
+// run #1 
+// run #2
+// run #3
+// run #4
+// run #5
+// run #6
+// run #7
+// run #8
+// run #9
+// run #10
+// run #11
+// run #12
 
 @main def main(): Unit =
   // 1-test readCSV method
