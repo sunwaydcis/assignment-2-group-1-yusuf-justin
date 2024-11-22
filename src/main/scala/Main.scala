@@ -74,26 +74,16 @@ end sort_records
 Question 1
 // return the state with the highest total beds::
 
-def Question1(records: List[Hospitals]): Unit =
-  // get a list of state
-  val StateList : List[String] = records.map(records -> records.state)
-  val StateRecentRecord : List[Record] = StateList.map(StateList -> StateList.latestRecord)
-
-  // compare data between each state
-  var StateWithHighestBed : String = StateList(0)
-  var HighestBedCount : Int = StateRecentRecord(0).TotalBed
-  // iterate through the rest of the records
-  counter = 1
-  for ( counter < StateList.length ) do
-    // compare if current state has more bed than pointer
-    if (StateRecentRecord(counter).TotalBed > HighestBedCount) then
-      // reassign state name
-      StateWithHighestBed = StateList(counter)
-      HighestBedCount = StateRecentRecord(counter).TotalBed
-    end if
-  end for
-  
-  println(s"The state with the highest number of beds : $HighestBedCount")
+// improved code for question 1
+def Question1(records: List[Hospital]): Unit =
+  // Get the latest record for each state
+  val latestRecordsByState: Map[String, Records] = records.map { hospital =>
+    hospital.State -> hospital.latestRecord
+  }.toMap
+  // Find the state with the highest total beds
+  val (stateWithHighestBeds, highestRecord) = latestRecordsByState.maxBy:
+    case (_, record) => record.TotalBed
+  println(s"Question 1: $stateWithHighestBeds ||| ${highestRecord.TotalBed} total beds")// write the code/ pseudocode for question 2
 end Question1
 
 @main def main(): Unit =
