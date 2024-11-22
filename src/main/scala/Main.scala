@@ -114,8 +114,12 @@ def Question2(records: List[Hospital]): Unit =
     TotalBed4Covid += hospital.latestRecord.CovidBed
   end for
 
-  println(s"the total amount of beds available : $TotalBedsAvailable")
-  println(s"the total amount of beds reserved for covid : $TotalBed4Covid")
+  //println(s"the total amount of beds available : $TotalBedsAvailable")
+  //println(s"the total amount of beds reserved for covid : $TotalBed4Covid")
+
+  // print the results
+  val Ratio : (Int,Int) = CalcRatio(int1 = TotalBedsAvailable, int2 = TotalBed4Covid)
+  println(s"Question 2 : Ratio of total Beds available to beds reserved for covid is $Ratio")
 end Question2  
 
 
