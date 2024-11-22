@@ -122,6 +122,37 @@ def Question2(records: List[Hospital]): Unit =
   println(s"Question 2 : Ratio of total Beds available to beds reserved for covid is $Ratio")
 end Question2  
 
+// Question 3
+// 
+def Question3 (records : List[Hospital]): Unit =
+  // create Map -> StateName -> Amount Of Records
+  val RecordByStates : Map[String, List[Records]] = records.map{ hospital => hospital.State -> hospital.Record}
+  println(RecordByStates)
+  println("Question 3:\n")
+  for ( (state , records) <- RecordByStates)
+    // At each state
+    var cSuspectedAdmissions : Int = 0
+    var cCovidAdmissions : Int = 0
+    var cNonCovidAdmissions : Int  =0
+    for ( record <- records)
+      // for each record in records collection
+      // extract the PUi
+      cSuspectedAdmissions += record.Admitted_Pui
+      // extract the Covid admissions
+      cCovidAdmissions += record.Admitted_Covid
+      // extract the non-covid admissions : formula Pui - covid admissions
+      cNonCovidAdmissions += (record.Admitted_Total - record.Admitted_Covid)
+    end for
+    // calculate the average
+    //println("======================\n")
+    //println(s"$state")
+    //println("Average Suspected admissions :" + (cSuspectedAdmissions.toDouble /records.length).ceil + " individuals")
+    //println("Average Covid Admissions :"+(cCovidAdmissions.toDouble / records.length).ceil + " individuals")
+    //println("Average Non Covid Admissions :"+(cNonCovidAdmissions.toDouble / records.length).ceil + " individuals")
+  end for
+end Question3
+
+
 
 @main def main(): Unit =
   // 1-test readCSV method
@@ -141,5 +172,6 @@ end Question2
   // Question 2
   Question2(HospitalObjects)
   // Question 3
+  Question3(HospitalObjects)
 
 
