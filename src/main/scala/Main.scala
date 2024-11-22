@@ -27,10 +27,10 @@ def readCSV(fileName : String): List[List[String]] =
   for (line <- filePath.getLines().drop(1)) 
     // for each line
     // split the information by each column// comma
-    val cols : List = line.split(",").map(_.trim).toList
+    val cols : List[String] = line.split(",").map(_.trim).toList
     fileData = fileData :+ cols
     //  increase counter - to count number of records
-    count += 1 
+    counter += 1 
   end for
   println(s"Amount of hospital records in csv file: {$counter} records")
   filePath.close()
@@ -220,14 +220,14 @@ end Question3
 
 @main def main(): Unit =
   // 1-test readCSV method
-  _hospitaldata = readCSV(fileName =_FilePath )
+  var _hospitalData = readCSV(fileName =_FilePath )
   // 2-Test hopsital Data
   // println(hospitalData)
   
   // create holder for state objects
   var HospitalObjects: List[Hospital] = state_init() 
   // println(HospitalObjects) -- works well
-  HospitalObjects = sort_records(_unprocessed_records = _hospitaldata, hospitalList = HospitalObjects)
+  HospitalObjects = sort_records(_unprocessed_records = _hospitalData, hospitalList = HospitalObjects)
 
   // Test hospital Objects latestRecord method
 
