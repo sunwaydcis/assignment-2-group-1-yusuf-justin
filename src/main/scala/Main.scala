@@ -5,147 +5,79 @@
 // SBT version : 1.9.9
 // JavaSDK required : JDK 21
 
-// import relevant libraries to process data
 import scala.io.Source
 import java.time.LocalDate
 
-// define file path
-val _FilePath : String = "./res/hospital_assignment.csv"
-
-// define placeholder variable to store data loaded from hospital_assignment.csv
-var hospitalData : List[List[String]]  = List()
-
-// define method to read data from file path, and parse it into hospitalData
-def readCSV(fileName : String): List[List[String]] =
-  // create a pointer to the filePath
-  val filePath = Source.fromFile(fileName)
-  // initialize temporary placeholder to hold data
-  var fileData : List[List[String]] = List()
-  // to count number of records in the file
-  var counter : Int = 0
-  // drop the header row, unnecessary for record processing
-  for (line <- filePath.getLines().drop(1)) 
-    // for each line
-    // split the information by each column// comma
-    val cols : List[String] = line.split(",").map(_.trim).toList
-    fileData = fileData :+ cols
-    //  increase counter - to count number of records
-    counter += 1 
-  end for
-  println(s"Amount of hospital records in csv file: {$counter} records")
-  filePath.close()
-  fileData
-end readCSV
-
-// defines a method to init State objects 
-def state_init(): List[Hospital] =
-  // there are 15 states altogather so init 15 state objects
-  val State = List(
-    "Selangor", "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
-    "Pahang", "Perak", "Pulau Pinang", "Sabah", "Sarawak", "Terengganu",
-    "W.P. Kuala Lumpur", "W.P. Labuan", "Perlis","W.P. Putrajaya"
-  )
-  val Hospitals = State.map(state => Hospital(_state = state))
-  // program returns Hospitals as List of Hospital objects
-  return Hospitals
-end state_init
-
-// create a function to sort records into their respective state objects
-def sort_records(_unprocessed_records : List[List[String]], hospitalList : List[Hospital]): List[Hospital] =
-  // function takes in 2 inputs
-  // _unprocessed_records - List of List of Strings that is data parsed from csv file
-  // hospitalList - List of Hospital class objects that will hold the record for their respective states Hospitals
-
-  for (record <- _unprocessed_records)
-    // extract state information from the record
-    val state = record(1).trim
-    // match the record information to its corresponding Hospital object
-    val hospital = hospitalList.find(_.State == state)
-
-    // for a record, when a hospital object match is found, attach the record to it
-    hospital match
-      case Some(hospital) => hospital.AddRecord(record)
-      case None =>println(s"No Corresponding hospital found for $state")
-  end for
-  hospitalList
-end sort_records      
-
-// Streamlined version of readCSV, state_init, sort_records
-def ProcessCSV(filePath : String) : List[Hospital] =
-  // attempt to optimze by streamlining the readCSV, state_init, and sort_records
-  // utilize map instead of list to store hospital data
-  var hospitals : Map[String, Hospital] = Map()
-  // read data from file path
-  val dataFromFile = Source.fromFile(filePath)
-  try 
-    dataFromFile.getLines().drop(1).foreach {
-      line =>
-      // sort 
-      val cols = line.split(",").map(_.trim).toList
-      val state = cols(1)
-      // insert logic later to sort by state
-      // if state doesn't exist, 
-    }
+// Define global variables
+final val _filePath : String = "./res/hospital_assignment.csv"
 
 
-// define a function for question 1
-// return the state with the highest total beds::
-
-// improved code for question 1
+// write the code / pseudocode for question 1
+// written by Justin Qiu
 def Question1(records: List[Hospital]): Unit =
-  // Get the latest record for each state
-  val latestRecordsByState: Map[String, Records] = records.map { hospital =>
-    hospital.State -> hospital.latestRecord
+  // step 1: Get the latest record for each state
+  // step 1.5 : store record in collection API Map[K,V] apply K =
+  // step 2: Aggregate the value for total beds at each state hospitals
+  // step 3: print results
+  var latestRecordByStates : Map[ String, Records]= Map()
+  // utilize collection API to sort data
+  latestRecordByStates = records.map { hospital =>
+    hospital.state -> hospital.LatestRecord
   }.toMap
   // Find the state with the highest total beds
-  val (stateWithHighestBeds, highestRecord) = latestRecordsByState.maxBy:
-    case (_, record) => record.TotalBed
-  println(s"Question 1: $stateWithHighestBeds ||| ${highestRecord.TotalBed} total beds")// write the code/ pseudocode for question 2
+  val (stateWithHighestBeds, highestRecord) = latestRecordByStates.maxBy:
+    case (_, record) => record.totalBed
+  println(s"Question 1: $stateWithHighestBeds ||| ${highestRecord.totalBed} total beds")// write the code/ pseudocode for question 2
 end Question1
 
-// define a function for question 2
-// define substeps for question 2
-// summarize all states beds, 
-// compare ratio between covid beds to every other bed types
-
-//finding common ratio requires common denominator, use GCD function
-// citation : Function is generated by chatgpt
+// write code for GCD
+// reference : Generated via Chatgpt to simplify Euclidean algorithm
 def GCD(int1 : Int, int2 :Int): Int =
   if (int2 == 0) int1 else GCD(int2, int1%int2 )
 end GCD
 
-// citation : function is generated by chatgpt
+// Write code to calculate Ratio
+// reference : Generated via Chatgpt to simplify ratio calculation
 def CalcRatio(int1 : Int, int2 : Int): (Int,Int) =
   val Divisor : Int = GCD(int1, int2)
   return (int1 / Divisor, int2 / Divisor)
 end CalcRatio
 
+// for question 2
+// written by Yusuf
+// uses List[] parametric polymorphism collection api
+// Justification : Traversal of list to collect beds information from each state, List if more efficient
 def Question2(records: List[Hospital]): Unit =
   // init placeholder to summarize
   // ::Total Beds available in all hospitals
   var TotalBedsAvailable : Int = 0
   var TotalBed4Covid : Int = 0
 
+  // fx name is small letters
   for (hospital <- records)
     // traverse each record, access total bed of each hospital at each state
-    TotalBedsAvailable += hospital.latestRecord.TotalBed
-    TotalBed4Covid += hospital.latestRecord.CovidBed
+    // from the collection API - list[] - the sequence collection API
+    TotalBedsAvailable += hospital.LatestRecord.totalBed
+    TotalBed4Covid += hospital.LatestRecord.covidBed
   end for
-
-  //println(s"the total amount of beds available : $TotalBedsAvailable")
-  //println(s"the total amount of beds reserved for covid : $TotalBed4Covid")
-
   // print the results
+  // calculate the ratio
   val Ratio : (Int,Int) = CalcRatio(int1 = TotalBedsAvailable, int2 = TotalBed4Covid)
+  // display the results
   println(s"Question 2 : Ratio of total Beds available to beds reserved for covid is $Ratio")
-end Question2  
+end Question2
 
 // Question 3
+// written by Yusuf
+// uses parametric polymorphism Map[] collection API,
 // 
 def Question3 (records : List[Hospital]): Unit =
-  // create Map -> StateName -> Amount Of Records
-  val RecordByStates : Map[String, List[Records]] = records.map{ hospital => hospital.State -> hospital.Record}.toMap
-  println(RecordByStates)
+  // call parametric polymorphism collection API for MAP[T,Z] apply
+  // init a variable for collection API
+  var RecordByStates : Map[ String, List[Records]] = Map()
+  // process data required into MAP[state <- Key, Record <- Value]
+  RecordByStates = records.map{ hospital => hospital.state -> hospital.record}.toMap
+  //println(RecordByStates)
   println("Question 3:\n")
   for ( (state , records) <- RecordByStates)
     // At each state
@@ -155,11 +87,11 @@ def Question3 (records : List[Hospital]): Unit =
     for ( record <- records)
       // for each record in records collection
       // extract the PUi
-      cSuspectedAdmissions += record.Admitted_Pui
+      cSuspectedAdmissions += record.admitted_Pui
       // extract the Covid admissions
-      cCovidAdmissions += record.Admitted_Covid
+      cCovidAdmissions += record.admitted_Covid
       // extract the non-covid admissions : formula Pui - covid admissions
-      cNonCovidAdmissions += (record.Admitted_Total - record.Admitted_Covid)
+      cNonCovidAdmissions += (record.Admitted_Total - record.admitted_Covid)
     end for
     // calculate the average
     println("======================\n")
@@ -170,6 +102,33 @@ def Question3 (records : List[Hospital]): Unit =
   end for
 end Question3
 
+
+// written by Yusuf
+def ProcessCSV(filePath: String): List[Hospital] =
+  // Create a mutable map to store hospitals dynamically
+  // uses parametric polymorphism collection API Map[K,V]
+  var hospitals = scala.collection.mutable.Map[String, Hospital]()
+  // Read and process the CSV file
+  val bufferedSource = Source.fromFile(filePath)
+  try
+    // uses error exception where issues can be present
+    // drop the header
+    // process each line
+    bufferedSource.getLines().drop(1).foreach : line =>
+        // converts
+        val cols = line.split(",").map(_.trim).toList
+        val state = cols(1)
+
+        // Check if the hospital for the state exists; if not, initialize it
+        val hospital = hospitals.getOrElseUpdate(state, Hospital(_state = state))
+        // Add the record to the corresponding hospital via AddRecord Function of Hospital class
+        hospital.AddRecord(cols)
+  finally
+    // closes file pointer
+    bufferedSource.close()
+  // Convert the mutable map values to a list of hospitals
+  hospitals.values.toList
+end ProcessCSV
 
 // optimization data : Before with readCSV, state_init & sort_records
 // run #1 Execution time: 5.1172229 seconds
@@ -205,35 +164,33 @@ end Question3
 // Average : 3.29 Seconds
 
 // optimization data : With ProcessCSV
-// run #1 
-// run #2
-// run #3
-// run #4
-// run #5
-// run #6
-// run #7
-// run #8
-// run #9
-// run #10
-// run #11
-// run #12
+// run #1 Execution time: 0.4580554 seconds 
+// run #2 Execution time: 0.4504188 seconds
+// run #3 Execution time: 0.4892105 seconds
+// run #4 Execution time: 0.4140576 seconds
+// run #5 Execution time: 0.4618636 seconds 
+// run #6 Execution time: 0.3834009 seconds
+// run #7 Execution time: 0.3295342 seconds
+// run #8 Execution time: 0.3670538 seconds
+// run #9 Execution time: 0.339628 seconds
+// run #10 Execution time: 0.3926234 seconds
+// run #11 Execution time: 0.3366705 seconds
 
+// Average : 0.4 Seconds
+
+
+// Main function to run the program
 @main def main(): Unit =
-  // 1-test readCSV method
-  var _hospitalData = readCSV(fileName =_FilePath )
-  // 2-Test hopsital Data
-  // println(hospitalData)
+  // Load data from CSV into global hospitalData
+  //  val startTime = System.nanoTime()
+  // read data
+  val data = ProcessCSV(filePath = _filePath)
+  // process it
+  Question1(data)
+  Question2(data)
+  Question3(data)
   
-  // create holder for state objects
-  var HospitalObjects: List[Hospital] = state_init() 
-  // println(HospitalObjects) -- works well
-  HospitalObjects = sort_records(_unprocessed_records = _hospitalData, hospitalList = HospitalObjects)
-
-  // Test hospital Objects latestRecord method
-
-  // Question 1
-  Question1(HospitalObjects)
-  // Question 2
-  Question2(HospitalObjects)
-  // Question 3
-  Question3(HospitalObjects)
+  //  val endTime = System.nanoTime()
+  //  val duration = (endTime-startTime)/1e9d
+  //  println(s"Execution time: ${duration} seconds")
+end main
